@@ -1,0 +1,80 @@
+/* -------------------------
+    STATS CARD
+-------------------------- */
+.stats-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      color: black;
+}
+
+.stats-card-title {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.stats-card-value {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 4px;
+      color: black;
+}
+
+/* -------------------------
+    TABLE BOX
+-------------------------- */
+.table-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.table-box h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
+      color: black;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* -------------------------
+    TABLE STYLING
+-------------------------- */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+
+      color: black;
+}
+
+.custom-table thead {
+  background: #f9fafb;
+      color: black;
+}
+
+.custom-table th {
+  padding: 10px;
+  text-align: left;
+  color: #6b7280;
+  font-size: 14px;
+      color: black;
+}
+
+.custom-table td {
+  padding: 12px;
+}
+
+.custom-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.custom-table tbody tr:hover {
+  background: #f3f4f6;
+}

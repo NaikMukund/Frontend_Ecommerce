@@ -1,0 +1,43 @@
+/* -----------------------------------
+   HEADER CONTAINER
+------------------------------------ */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* -----------------------------------
+   TITLE
+------------------------------------ */
+.header-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #111827;
+}
+
+/* -----------------------------------
+   PROFILE SECTION
+------------------------------------ */
+.header-profile-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-profile-name {
+  font-size: 16px;
+  color: #374151;
+}
+
+.header-profile-circle {
+  width: 42px;
+  height: 42px;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

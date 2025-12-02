@@ -1,0 +1,36 @@
+/* -----------------------------------
+   DASHBOARD LAYOUT
+------------------------------------ */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+/* -----------------------------------
+   MAIN CONTENT
+------------------------------------ */
+.dashboard-main {
+  flex: 1;
+  padding: 24px;
+}
+
+/* -----------------------------------
+   GRID FOR STATS CARDS
+------------------------------------ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* -----------------------------------
+   FOOTER
+------------------------------------ */
+.dashboard-footer {
+  text-align: center;
+  margin-top: 36px;
+  font-size: 14px;
+  color: #9ca3af;
+}

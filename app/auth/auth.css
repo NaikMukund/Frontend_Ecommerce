@@ -1,0 +1,77 @@
+/* Container for both pages */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: aliceblue;
+  padding: 1rem;
+}
+
+/* Form box */
+.auth-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Form title */
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Input fields */
+.auth-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+/* Submit button */
+.auth-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #2575fc;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+/* Button hover */
+.auth-form button:hover {
+  background: #1a5ed0;
+}
+
+/* Error message */
+.auth-form p.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Footer link */
+.auth-form p.footer-text {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.auth-form p.footer-text a {
+  color: #2575fc;
+  text-decoration: underline;
+}

@@ -1,0 +1,47 @@
+"use client";
+
+import "./index.css";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+export default function Sidebar() {
+  const pathname = usePathname();
+
+  const isActive = (path) => pathname === path;
+
+  return (
+    <aside className="sidebar-container">
+      <h2 className="sidebar-title">Admin Panel</h2>
+
+      <nav className="sidebar-nav">
+        <Link
+          href="/admin/dashboards"
+          className={`sidebar-link ${isActive("/admin/dashbords") ? "active" : ""}`}
+        >
+          Dashboard
+        </Link>
+
+        <Link
+          href="/admin/users"
+          className={`sidebar-link ${isActive("/admin/users") ? "active" : ""}`}
+        >
+          Users
+        </Link>
+
+        <Link
+          href="/admin/product"
+          className={`sidebar-link ${isActive("/admin/products") ? "active" : ""}`}
+        >
+          Products
+        </Link>
+
+        <Link
+          href="/admin/settings"
+          className={`sidebar-link ${isActive("/admin/settings") ? "active" : ""}`}
+        >
+        Log out
+        </Link>
+      </nav>
+    </aside>
+  );
+}
