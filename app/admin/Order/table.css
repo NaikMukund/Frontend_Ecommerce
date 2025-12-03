@@ -1,0 +1,130 @@
+/* Wrapper */
+.orders-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* Main table */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.orders-header-row {
+  background: #f4f5f7;
+}
+
+.orders-header {
+  padding: 12px 14px;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+}
+
+/* Table rows */
+.orders-row:hover {
+  background: #f9fafb;
+}
+
+.orders-cell {
+  padding: 12px 14px;
+  border-bottom: 1px solid #ececec;
+  color: #444;
+}
+
+/* Empty row */
+.orders-empty {
+  text-align: center;
+  padding: 22px;
+  font-size: 15px;
+  color: #666;
+}
+
+/* Badges */
+.orders-badge {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+/* Payment Status Colors */
+.orders-badge--pending {
+  background: #ffe9b3;
+  color: #b07900;
+}
+
+.orders-badge--paid {
+  background: #d4f8d4;
+  color: #0b8a14;
+}
+
+.orders-badge--failed {
+  background: #ffd6d6;
+  color: #be1a1a;
+}
+
+.orders-badge--refunded {
+  background: #ffe6cc;
+  color: #b35c00;
+}
+
+/* Order Status Colors */
+.orders-badge--placed {
+  background: #cce0ff;
+  color: #2256c7;
+}
+
+.orders-badge--processing {
+  background: #d8f0ff;
+  color: #0072b6;
+}
+
+.orders-badge--shipped {
+  background: #dfffea;
+  color: #0d8e45;
+}
+
+.orders-badge--delivered {
+  background: #dcffe6;
+  color: #0c8a3b;
+}
+
+.orders-badge--cancelled {
+  background: #ffd4d4;
+  color: #c92a2a;
+}
+
+/* Buttons */
+.orders-action-btn {
+  padding: 6px 12px;
+  background: #4b70f5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-right: 8px;
+  transition: 0.2s;
+}
+
+.orders-action-btn:hover {
+  background: #3a58c7;
+}
+
+.orders-action-btn--danger {
+  background: #e84545;
+}
+
+.orders-action-btn--danger:hover {
+  background: #c53030;
+}

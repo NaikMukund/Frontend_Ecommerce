@@ -45,7 +45,7 @@ export default function AdminDashboard() {
       <Sidebar />
 
       <div className="dashboard-main">
-        <Header />
+        <Header title="Admin Dashboard" />
 
         {/* Stats Cards */}
         <div className="stats-grid">

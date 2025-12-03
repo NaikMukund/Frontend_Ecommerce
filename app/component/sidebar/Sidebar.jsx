@@ -36,10 +36,10 @@ export default function Sidebar() {
         </Link>
 
         <Link
-          href="/admin/settings"
+          href="/admin/Order"
           className={`sidebar-link ${isActive("/admin/settings") ? "active" : ""}`}
         >
-        Log out
+        Orders
         </Link>
       </nav>
     </aside>

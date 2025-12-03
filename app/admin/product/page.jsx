@@ -39,7 +39,7 @@ export default function ProductsPage() {
       <Sidebar />
 
       <div className="dashboard-main">
-        <Header title="Products" />
+        <Header title="Products Dashboard" />
 
         {/* CREATE PRODUCT BUTTON */}
         <button
