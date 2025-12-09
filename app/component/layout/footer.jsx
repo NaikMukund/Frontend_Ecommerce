@@ -4,7 +4,7 @@ export default function Footer() {
       style={{
         marginTop: "40px",
         padding: "20px",
-        background: "#111",
+     background: "#362424",
         color: "#fff",
         textAlign: "center",
       }}

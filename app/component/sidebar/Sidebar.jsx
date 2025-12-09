@@ -8,7 +8,9 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const isActive = (path) => pathname === path;
-
+ const handlelogout=()=>{
+  localStorage.removeItem("admiintoken")
+ }
   return (
     <aside className="sidebar-container">
       <h2 className="sidebar-title">Admin Panel</h2>
@@ -42,6 +44,16 @@ export default function Sidebar() {
         Orders
         </Link>
       </nav>
+      <div className="down">
+            <Link
+          href="/auth/login"
+          className={`sidebar-link ${isActive("/admin/settings") ? "active" : ""}`}
+          onClick={handlelogout}
+        >
+logout
+
+        </Link>
+      </div>
     </aside>
   );
 }

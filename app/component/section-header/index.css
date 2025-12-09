@@ -3,7 +3,7 @@
 ------------------------------------ */
 .header-container {
   display: flex;
-  justify-content: space-between;
+    justify-content: center;
   align-items: center;
   margin-bottom: 24px;
 }
@@ -14,7 +14,7 @@
 .header-title {
   font-size: 28px;
   font-weight: bold;
-  color: #111827;
+
 }
 
 /* -----------------------------------
@@ -40,4 +40,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+}
+
+section.featured-products {
+    margin: 30px 15px;
 }

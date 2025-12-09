@@ -39,19 +39,24 @@ export default function ProductsTable({ products, onUpdate, onDelete }) {
                     variant="contained"
                     size="small"
                     sx={{ marginRight: 1 }}
-                    onClick={() => onUpdate(p._id || p.id)}
+            onClick={() => onDelete?.(p._id || p.id)}
+
                   >
                     Update
                   </Button>
 
-                  <Button
-                    variant="contained"
-                    color="error"
-                    size="small"
-                    onClick={() => onDelete(p._id || p.id)}
-                  >
-                    Delete
-                  </Button>
+             
+<Button
+  variant="contained"
+  color="error"
+  size="small"
+  onClick={() => onDelete?.(p._id || p.id)}
+>
+  Delete
+</Button>
+
+
+                  
                 </TableCell>
               </TableRow>
             ))

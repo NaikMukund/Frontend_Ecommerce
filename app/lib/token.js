@@ -4,14 +4,8 @@ export const getToken = () => {
   const path = window.location.pathname;
 
   if (path.startsWith("/admin")) {
-    return sessionStorage.getItem("adminToken");
-  }
-  if (path.startsWith("/merchant")) {
-    return sessionStorage.getItem("merchantToken");
-  }
-  if (path.startsWith("/reseller")) {
-    return sessionStorage.getItem("resellerToken");
+    return sessionStorage.getItem("adminToken"); 
   }
 
-  return localStorage.getItem("accessToken"); // default
+  return localStorage.getItem("accessToken");
 };

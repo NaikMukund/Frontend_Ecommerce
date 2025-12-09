@@ -2,11 +2,14 @@
    SIDEBAR CONTAINER
 ------------------------------------ */
 .sidebar-container {
-  width: 260px;
-  background: white;
-  padding: 20px;
-  box-shadow: 2px 0 15px rgba(0,0,0,0.06);
-  height: 100vh;
+     background: #fff;
+    width: 260px;
+    height: 97vh;
+    padding: 20px;
+    box-shadow: 7px 3px 15px #00000054;
+    border-radius: 39px;
+    margin: 10px;
+
 }
 
 /* -----------------------------------

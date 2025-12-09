@@ -1,4 +1,4 @@
-const BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+const BASE = process.env.NEXT_PUBLIC_API_BASE ;
 const PREFIX = process.env.NEXT_PUBLIC_API_PREFIX || "/api";
 
 // Clean URL builder

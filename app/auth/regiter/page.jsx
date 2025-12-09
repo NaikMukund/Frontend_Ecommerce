@@ -25,15 +25,13 @@ export default function RegisterPage() {
       if (!accessToken) throw new Error("Token missing from server");
 
       // ROLE WISE TOKEN SAVE
-      if (role === "admin") {
-        sessionStorage.setItem("adminToken", accessToken);
-      } else if (role === "merchant") {
-        sessionStorage.setItem("merchantToken", accessToken);
-      } else if (role === "reseller") {
-        sessionStorage.setItem("resellerToken", accessToken);
-      } else {
-        localStorage.setItem("accessToken", accessToken);
-      }
+if (role === "admin") {
+  localStorage.setItem("adminToken", accessToken);
+} else {
+  localStorage.setItem("accessToken", accessToken);
+}
+
+
 
       if (refreshToken) {
         localStorage.setItem("refreshToken", refreshToken);

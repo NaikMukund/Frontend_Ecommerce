@@ -20,7 +20,7 @@ export default function UsersPage() {
   useEffect(() => {
     async function loadUsers() {
       try {
-        const res = await adminApi.getUsers();
+        const res = await adminApi.users.getAll();
         setUsers(res.users);
       } catch (err) {
         console.log("Error:", err);
@@ -81,7 +81,7 @@ export default function UsersPage() {
           open={openCreate}
           onClose={() => setOpenCreate(false)}
           onSave={async (data) => {
-            const res = await adminApi.createUser(data);
+            const res = await adminApi.users.create(data);
             setUsers([...users, res.user]);
             setOpenCreate(false);
           }}
@@ -93,7 +93,7 @@ export default function UsersPage() {
           onClose={() => setOpenUpdate(false)}
           user={selectedUser}
           onSave={async (data) => {
-            const res = await adminApi.updateUser(selectedUser._id, data);
+            const res = await adminApi.users.update(selectedUser._id, data);
             setUsers(users.map((u) => (u._id === selectedUser._id ? res.updatedUser : u)));
             setOpenUpdate(false);
           }}

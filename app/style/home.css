@@ -1,31 +1,37 @@
 /* GLOBAL STYLE */
 .home-page {
-  font-family: "Inter", sans-serif;
-  background: #f5f7fa;
-  color: #222;
-  display: flex;
-  flex-direction: column;
-      height: 100vh;
+     color: #fffffffc;
+    flex-direction: column;
+    font-family: Inter, sans-serif;
+    display: flex;
+  
 }
 
 /* --------------------------- */
 /* HERO SECTION                */
 /* --------------------------- */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1; /* pushes footer to bottom */
+}
+
 
 .hero {
-  max-width: 1300px;
-  margin: 40px auto;
-  padding: 40px;
-  background: white;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+background: #fff;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+    display: flex;
 }
 
 .hero-content {
-  width: 55%;
+  width: 100%;
+  text-align: center;
 }
 
 .hero-content h1 {
@@ -38,65 +44,4 @@
   font-size: 17px;
   opacity: 0.8;
   margin-bottom: 20px;
-}
-
-.shop-btn {
-  padding: 12px 28px;
-  background: #111;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.shop-btn:hover {
-  background: #333;
-}
-
-/* HERO IMAGE */
-.hero-banner img {
-  width: 350px;
-  border-radius: 12px;
-}
-
-/* --------------------------- */
-/* FEATURED PRODUCTS           */
-/* --------------------------- */
-
-.featured-products {
-
-  text-align: center;
-  flex: 1;
-}
-
-.featured-products h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 25px;
-}
-
-/* PRODUCT GRID */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 25px;
-  padding: 0 20px;
-}
-
-/* MAKING THE PAGE RESPONSIVE */
-@media (max-width: 900px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-content {
-    width: 100%;
-  }
-
-  .hero-banner img {
-    width: 260px;
-  }
 }

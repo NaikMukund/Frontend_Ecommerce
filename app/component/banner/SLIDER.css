@@ -1,0 +1,123 @@
+/* =======================================================
+   SLIDER CONTAINER
+======================================================= */
+.slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin: 10px 0px;
+    overflow: hidden;
+   
+}
+
+/* =======================================================
+   IMAGE
+======================================================= */
+.slider-img {
+    padding: 12px;
+    width: 100%;
+    height: 100%;
+    object-fit: inherit;
+    transition: opacity 0.4s ease-in-out;
+    /* Smooth fade */
+}
+
+/* =======================================================
+   ARROWS
+======================================================= */
+.left-arrow,
+.right-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20, 20, 20, 0.45);
+    padding: 10px 16px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+    transition: 0.25s ease;
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+    background: rgba(20, 20, 20, 0.75);
+    transform: translateY(-50%) scale(1.12);
+}
+
+.left-arrow {
+    left: 15px;
+}
+
+.right-arrow {
+    right: 15px;
+}
+
+/* =======================================================
+   DOTS
+======================================================= */
+.dots {
+    position: absolute;
+    bottom: 18px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    z-index: 15;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.dot:hover {
+    background: #aaa;
+}
+
+.dot.active {
+    background: #ff6600;
+    transform: scale(1.25);
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
+}
+
+/* =======================================================
+   RESPONSIVE STYLES
+======================================================= */
+
+@media (max-width: 1100px) {
+    .slider {
+        height: 350px;
+    }
+}
+
+@media (max-width: 800px) {
+    .slider {
+        height: 280px;
+    }
+
+    .left-arrow,
+    .right-arrow {
+        font-size: 22px;
+        padding: 7px 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .slider {
+        height: 220px;
+        border-radius: 14px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}

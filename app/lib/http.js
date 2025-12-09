@@ -3,15 +3,14 @@ import { buildURL } from "./url";
 
 export async function http(path, options = {}) {
   const token = getToken();
-
-  const url = buildURL(path); // env-based URL
+  const url = buildURL(path);
 
   const res = await fetch(url, {
     method: options.method || "GET",
     headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : "",
       ...(options.headers || {}),
+      "Content-Type": options.body instanceof FormData ? undefined : "application/json",
+      Authorization: token ? `Bearer ${token}` : "",
     },
     body: options.body || null,
   });

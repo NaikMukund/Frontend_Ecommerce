@@ -1,13 +1,5 @@
 "use client";
 
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-} from "@mui/material";
 import { useState } from "react";
 
 export default function CreateProductModal({ open, onClose, onSave }) {
@@ -16,50 +8,114 @@ export default function CreateProductModal({ open, onClose, onSave }) {
     price: "",
     category: "",
     stock: "",
+    images: [],
   });
 
-  const change = (k, v) => setForm({ ...form, [k]: v });
+  if (!open) return null;
+
+  // Handle text input
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // Handle image input
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setForm({ ...form, images: files });
+  };
+
+  const handleSubmit = () => {
+    if (!form.title || !form.price) {
+      alert("Please fill required fields");
+      return;
+    }
+
+    // send formData to parent
+    onSave(form);
+  };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>Create Product</DialogTitle>
+    <div className="modal-overlay">
+      <div className="modal-box">
+        <h2>Create Product</h2>
 
-      <DialogContent>
-        <TextField
-          label="Title"
-          fullWidth
-          margin="normal"
-          onChange={(e) => change("title", e.target.value)}
-        />
-        <TextField
-          label="Price"
-          type="number"
-          fullWidth
-          margin="normal"
-          onChange={(e) => change("price", e.target.value)}
-        />
-        <TextField
-          label="Category"
-          fullWidth
-          margin="normal"
-          onChange={(e) => change("category", e.target.value)}
-        />
-        <TextField
-          label="Stock"
-          type="number"
-          fullWidth
-          margin="normal"
-          onChange={(e) => change("stock", e.target.value)}
-        />
-      </DialogContent>
+        <div className="form-group">
+          <label>Title *</label>
+          <input
+            className="input"
+            name="title"
+            onChange={handleChange}
+            value={form.title}
+          />
+        </div>
 
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <div className="form-group">
+          <label>Price *</label>
+          <input
+            type="number"
+            className="input"
+            name="price"
+            onChange={handleChange}
+            value={form.price}
+          />
+        </div>
 
-        <Button variant="contained" onClick={() => onSave(form)}>
-          Create
-        </Button>
-      </DialogActions>
-    </Dialog>
+        <div className="form-group">
+          <label>Category</label>
+          <input
+            className="input"
+            name="category"
+            onChange={handleChange}
+            value={form.category}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Stock</label>
+          <input
+            type="number"
+            className="input"
+            name="stock"
+            onChange={handleChange}
+            value={form.stock}
+          />
+        </div>
+
+        {/* Image Upload */}
+        <div className="form-group">
+          <label>Product Images</label>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </div>
+
+        {/* Preview */}
+        {form.images.length > 0 && (
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+            {form.images.map((img, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(img)}
+                width={60}
+                height={60}
+                style={{ borderRadius: "6px" }}
+              />
+            ))}
+          </div>
+        )}
+
+        <div className="modal-actions">
+          <button className="btn cancel" onClick={onClose}>
+            Close
+          </button>
+          <button className="btn save" onClick={handleSubmit}>
+            Create Product
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

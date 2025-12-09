@@ -21,8 +21,10 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function load() {
       try {
-        const usersData = await adminApi.getUsers();
-        const productsData = await adminApi.getProducts();
+        const usersData = await adminApi.users.getAll();
+        console.log(usersData);
+        
+        const productsData = await adminApi.products.getAll();
         console.log("usersData", usersData);
 
 

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "../auth.css";
 
+
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -16,6 +17,7 @@ export default function LoginPage() {
     try {
       setError("");
 
+      // 🔥 Call your backend API
       const res = await publicApi.login(data);
 
       const accessToken = res?.tokens?.accessToken;
@@ -24,9 +26,9 @@ export default function LoginPage() {
 
       if (!accessToken) throw new Error("Token missing from server");
 
-      // ----------------------------
-      // ROLE-WISE TOKEN STORAGE
-      // ----------------------------
+      // --------------------------------------------------
+      // STORE TOKENS ROLE-WISE (your original logic)
+      // --------------------------------------------------
       if (role === "admin") {
         sessionStorage.setItem("adminToken", accessToken);
       } else if (role === "merchant") {
@@ -37,22 +39,26 @@ export default function LoginPage() {
         localStorage.setItem("accessToken", accessToken);
       }
 
-      // Save refresh token (common)
+      // Save refresh token
       if (refreshToken) {
         localStorage.setItem("refreshToken", refreshToken);
       }
 
       localStorage.setItem("role", role);
 
-      // ----------------------------
+      // --------------------------------------------------
+      // 🔥 IMPORTANT: Store token in COOKIE for middleware
+      // --------------------------------------------------
+      await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ token: accessToken }),
+      });
+
+      // --------------------------------------------------
       // ROLE-WISE REDIRECT
-      // ----------------------------
+      // --------------------------------------------------
       if (role === "admin") {
         router.push("/admin/dashboards");
-      } else if (role === "merchant") {
-        router.push("/merchant/dashboard");
-      } else if (role === "reseller") {
-        router.push("/reseller/dashboard");
       } else {
         router.push("/");
       }
@@ -70,16 +76,16 @@ export default function LoginPage() {
 
         {error && <p className="error">{error}</p>}
 
-        <label style={{ color: "black" }}>Email</label>
+        <label>Email</label>
         <input type="email" {...register("email")} required />
 
-        <label style={{ color: "black" }}>Password</label>
+        <label>Password</label>
         <input type="password" {...register("password")} required />
 
         <button type="submit">Login</button>
 
         <p className="footer-text">
-          Don’t have an account? <Link href="/auth/regiter">Register</Link>
+          Don have an account? <Link href="/auth/regiter">Register</Link>
         </p>
       </form>
     </div>

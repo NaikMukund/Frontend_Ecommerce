@@ -1,19 +1,19 @@
-export default function CartItem({ item }) {
+import Navbar from "../layout/navbar";
+import Footer from "../layout/footer";
+import CartItem from "./CartItem";
+import  "./index.css"
+export default function CartPage({ cart }) {
   return (
-    <div
-      style={{
-        borderBottom: "1px solid #ddd",
-        padding: "15px 0",
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
-      <div>
-        <h3>{item.title}</h3>
-        <p>Qty: {item.quantity}</p>
-      </div>
+    <div className="page-wrapper">
+      <Navbar />
 
-      <strong>₹{item.price * item.quantity}</strong>
+      <main className="content">
+        {cart.items.map((item) => (
+          <CartItem key={item._id} item={item} />
+        ))}
+      </main>
+
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,11 @@
+/* Wraps the entire page */
+.page-wrapper {
+  min-height: 100vh;         /* full page height */
+  display: flex;             /* enable flex layout */
+  flex-direction: column;    /* stack children vertical */
+}
+
+/* Content grows and pushes footer down */
+.content {
+  flex: 1;
+}

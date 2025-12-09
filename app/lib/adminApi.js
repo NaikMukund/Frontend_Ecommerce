@@ -1,78 +1,86 @@
 import { http } from "./http";
 
+const BASE = process.env.NEXT_PUBLIC_API_BASE;
+
 export const adminApi = {
-  // FETCH USERS
-  getUsers: () => http("/admin/getuser"),
+  /* ===================== USERS GROUP ====================== */
+  users: {
+  getAll: () => http("/admin/getuser", { method: "GET" }),
 
-  // FETCH PRODUCTS
-  getProducts: () => http("/admin/getproduct"),
-  
+    
 
+    create: (data) =>
+      http("/admin/users/create", {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
 
+    delete: (id) =>
+      http(`/admin/users/${id}`, {
+        method: "DELETE",
+      }),
 
-  // CREATE PRODUCT
-  createProduct: (data) =>
-    http("/admin/createproduct", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
+    update: (id, data) =>
+      http(`/admin/users/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      }),
+  },
 
-  // DELETE PRODUCT
-  deleteProduct: (id) =>
-    http(`/admin/products/${id}`, {
-      method: "DELETE",
-    }),
+  /* ===================== PRODUCTS GROUP ====================== */
+  products: {
+    getAll: () => http("/admin/getproduct"),
 
-  // UPDATE PRODUCT
-  updateProduct: (id, data) =>
-    http(`/admin/products/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    }),
-    createUser: (data) =>
-  http("/admin/users/create", {
-    method: "POST",
-    body: JSON.stringify(data),
-  }),
+    create: async (data) => {
+      const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("price", data.price);
+      formData.append("category", data.category);
+      formData.append("stock", data.stock);
 
-  //crete user
-  createUser: (data) =>
-  http("/admin/users/create", {
-    method: "POST",
-    body: JSON.stringify(data),
-  }),
+      data.images.forEach((img) => {
+        formData.append("images", img);
+      });
 
+      const res = await fetch(`${BASE}/api/admin/createproduct`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("adminToken")}`,
+        },
+        body: formData,
+      });
 
-  // DELETE USER
-  deleteUser: (id) =>
-    http(`/admin/users/${id}`, {
-      method: "DELETE",
-    }),
+      return res.json();
+    },
 
-  // UPDATE USER
-  updateUser: (id, data) =>
-    http(`/admin/users/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
+    delete: (id) =>
+      http(`/admin/products/${id}`, {
+        method: "DELETE",
+      }),
 
-    }),
- // Get all orders
-  getOrders: () => http(`/admin/orders`),
+    update: (id, data) =>
+      http(`/admin/products/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      }),
+  },
 
-  // Get a single order by ID
-  getOrderById: (id) => http(`/admin/orders/${id}`),
+  /* ===================== ORDERS GROUP ====================== */
+  orders: {
+    getAll: () => http(`/admin/orders`),
 
-  createOrder: (data) =>
-  http(`/admin/createorder`, {
-    method: "POST",
-    body: JSON.stringify(data),
-  }),
+    getById: (id) => http(`/admin/orders/${id}`),
 
-  // Update order by ID
-updateOrder: (id, data) =>
-  http(`/admin/orders/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(data),
-  }),
+    create: (data) =>
+      http(`/admin/createorder`, {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
 
+    update: (id, data) =>
+      http(`/admin/orders/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      }),
+  },
 };

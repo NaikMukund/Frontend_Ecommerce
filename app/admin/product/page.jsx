@@ -21,7 +21,7 @@ export default function ProductsPage() {
   useEffect(() => {
     async function loadProducts() {
       try {
-        const res = await adminApi.getProducts();
+        const res = await adminApi.products.getAll();
         setProducts(res.products);
       } catch (err) {
         console.log("Error:", err);
@@ -73,22 +73,25 @@ export default function ProductsPage() {
         {/* PRODUCTS TABLE */}
         <ProductsTable
           products={products}
+
           onDelete={async (id) => {
-            await adminApi.deleteProduct(id);
-            setProducts(products.filter((p) => p._id !== id));
+            await adminApi.products.delete(id);
+            setProducts((prev) => prev.filter((p) => p._id !== id));
           }}
+
           onUpdate={(id) => {
             setSelectedProduct(products.find((p) => p._id === id));
             setOpenUpdate(true);
           }}
         />
 
+
         {/* CREATE PRODUCT MODAL */}
         <CreateProductModal
           open={openCreate}
           onClose={() => setOpenCreate(false)}
           onSave={async (data) => {
-            const res = await adminApi.createProduct(data);
+            const res = await adminApi.products.create(data);
             setProducts([...products, res]);
             setOpenCreate(false);
           }}
@@ -100,7 +103,7 @@ export default function ProductsPage() {
           onClose={() => setOpenUpdate(false)}
           product={selectedProduct}
           onSave={async (data) => {
-            const res = await adminApi.updateProduct(selectedProduct._id, data);
+            const res = await adminApi.products.update(selectedProduct._id, data);
 
             setProducts(
               products.map((p) =>

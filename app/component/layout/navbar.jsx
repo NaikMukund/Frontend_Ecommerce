@@ -7,11 +7,14 @@ export default function Navbar() {
     <nav
       style={{
         padding: "15px 20px",
-        background: "#111",
+    background: "#362424",
         color: "#fff",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+            position: "sticky", 
+        top: 0,             
+        zIndex: 999, 
       }}
     >
       <h2 style={{ margin: 0 }}>E-Commerce</h2>

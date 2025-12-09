@@ -20,7 +20,7 @@ export default function OrdersPage() {
   useEffect(() => {
     async function loadOrders() {
       try {
-        const res = await adminApi.getOrders();
+        const res = await adminApi.orders.getAll();
         setOrders(res); // FIXED — backend returns array, not res.orders
       } catch (err) {
         console.log("Error loading orders:", err);
