@@ -1,51 +1,38 @@
 "use client";
 import Link from "next/link";
-
+import Image from "next/image"; 
+import "./productcard.css";
+import nav_cart_icon from "../../../public/nav_cart_icon.svg";
 export default function ProductCard({ product }) {
-const raw = product.images?.[0] || "";
-const clean = raw.replace(/^https?:\/\/[^/]+\/uploads\//, "");
-const imgUrl = `${process.env.NEXT_PUBLIC_API_BASE}/uploads/${clean}`;
-
+  const raw = product.images?.[0] || "";
+  const clean = raw.replace(/^https?:\/\/[^/]+\/uploads\//, "");
+  const imgUrl = `${process.env.NEXT_PUBLIC_API_BASE}/uploads/${clean}`;
 
   return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        padding: "15px",
-        borderRadius: "8px",
-        width: "250px",
-        background:"white",
-        color:"black"
-      }}
-    >
-      <img
-        src={imgUrl}
-        alt={product.title}
-        style={{
-          width: "100%",
-          height: "180px",
-          objectFit: "contain",
-          borderRadius: "6px",
-        }}
-      />
+    <div className="gc-card">
+      <div className="gc-image">
+        <img src={imgUrl} alt={product.title} />
+      </div>
 
-      <h3>{product.title}</h3>
-      <p style={{ fontWeight: "bold" }}>₹{product.price}</p>
+      <span className="gc-category">{product.category}</span>
 
-      <Link
-        href={`/product/${product._id}`}
-        style={{
-          padding: "8px 10px",
-          display: "inline-block",
-               background:"red",
-          color: "white",
-          borderRadius: "4px",
-          textDecoration: "none",
-          marginTop: "10px",
-        }}
-      >
-        View Details
-      </Link>
+      <h4 className="gc-title">{product.title}</h4>
+
+      <div className="gc-bottom">
+        <span className="gc-price">₹{product.price}</span>
+
+<Link href={`/product/${product._id}`} className="gc-add-link">
+  <Image
+    src={nav_cart_icon}
+    alt="add to cart"
+    className="gc-add-btn "
+  />
+
+</Link>
+
+      </div>
+
+
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { publicApi } from "../.././lib/publicApi";
+import { publicApi } from "../../lib/publicApi";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "./register.css";
@@ -10,7 +10,12 @@ import "./register.css";
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState("");
-  const { register, handleSubmit } = useForm();
+const { register, handleSubmit } = useForm({
+  defaultValues: {
+    role: "customer",
+  },
+});
+
 
   const onSubmit = async (data) => {
     try {
@@ -24,14 +29,12 @@ export default function RegisterPage() {
 
       if (!accessToken) throw new Error("Token missing from server");
 
-      // ROLE WISE TOKEN SAVE
-if (role === "admin") {
-  localStorage.setItem("adminToken", accessToken);
-} else {
-  localStorage.setItem("accessToken", accessToken);
-}
-
-
+      // Role-wise token storage
+      if (role === "admin") {
+        localStorage.setItem("adminToken", accessToken);
+      } else {
+        localStorage.setItem("accessToken", accessToken);
+      }
 
       if (refreshToken) {
         localStorage.setItem("refreshToken", refreshToken);
@@ -40,41 +43,51 @@ if (role === "admin") {
       localStorage.setItem("role", role);
 
       router.push(role === "admin" ? "/admin/dashboard" : "/");
-
     } catch (err) {
       setError(err.message || "Registration failed");
     }
   };
 
   return (
-    <div className="register-page">
-      <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Create Account</h2>
+    <div className="auth-wrapper">
+      <div className="overlay"></div>
 
-        {error && <p className="error-text">{error}</p>}
+      <form className="auth-card" onSubmit={handleSubmit(onSubmit)}>
+        <h2>User Sign Up</h2>
+
+        {error && <p className="error">{error}</p>}
 
         <label>Name</label>
-        <input type="text" {...register("name")} placeholder="Your full name" required />
+        <input
+          type="text"
+          placeholder="type here"
+          {...register("name")}
+          required
+        />
 
         <label>Email</label>
-        <input type="email" {...register("email")} placeholder="your@example.com" required />
+        <input
+          type="email"
+          placeholder="type here"
+          {...register("email")}
+          required
+        />
 
         <label>Password</label>
-        <input type="password" {...register("password")} placeholder="Enter password" required />
+        <input
+          type="password"
+          placeholder="type here"
+          {...register("password")}
+          required
+        />
 
-        <label>Select Role</label>
-        <select {...register("role")} required>
-          <option value="customer">Customer</option>
-          <option value="merchant">Merchant</option>
-          <option value="reseller">Reseller</option>
-          <option value="admin">Admin</option>
-        </select>
+    
 
-        <button type="submit" className="btn-register">Register</button>
-
-        <p className="footer-text">
-          Already have an account? <Link href="/auth/login">Login</Link>
+        <p className="link-text">
+          Already have account? <Link href="/auth/login">click here</Link>
         </p>
+
+        <button type="submit">Create Account</button>
       </form>
     </div>
   );

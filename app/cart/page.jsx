@@ -3,171 +3,120 @@
 import { useEffect, useState } from "react";
 import Navbar from "../component/layout/navbar";
 import Footer from "../component/layout/footer";
-import { publicApi } from ".././lib/publicApi";
+import { publicApi } from "../lib/publicApi";
 import "./cart.css";
+import Link from "next/link";
 
 export default function CartPage() {
   const [cart, setCart] = useState(null);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Load cart on mount
   useEffect(() => {
     async function loadCart() {
-      try {
-        const data = await publicApi.getCart();
-        setCart(data);
-      } catch (err) {
-        setError(err.message);
-      }
+      const data = await publicApi.getCart();
+      setCart(data);
     }
     loadCart();
   }, []);
 
-  if (!cart) return <p>Loading cart...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!cart) return <p className="cart-loading">Loading cart...</p>;
 
-  const validItems = cart.items.filter((item) => item?.product);
+  const items = cart.items.filter((i) => i?.product);
+  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const tax = Math.round(subtotal * 0.02);
+  const total = subtotal + tax;
 
-  const total = validItems.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
-
-  // -------------------------------
-  // INCREMENT QUANTITY
-  // -------------------------------
-  const incrementQty = async (item) => {
-    const newQty = item.qty + 1;
+  const updateQty = async (item, qty) => {
+    if (qty < 1) return;
     setLoading(true);
-
-    try {
-      const updated = await publicApi.updateCart(item.product._id, newQty);
-
-      setCart(updated); // backend returns full updated cart
-    } catch (err) {
-      console.error(err);
-    }
-
-    setLoading(false);
-  };
-
-  // -------------------------------
-  // DECREMENT QUANTITY
-  // -------------------------------
-  const decrementQty = async (item) => {
-    if (item.qty === 1) return; // prevent 0 qty
-
-    const newQty = item.qty - 1;
-    setLoading(true);
-
-    try {
-      const updated = await publicApi.updateCart(item.product._id, newQty);
-
-      setCart(updated);
-    } catch (err) {
-      console.error(err);
-    }
-
-    setLoading(false);
-  };
-
-  // -------------------------------
-  // DELETE ITEM
-  // -------------------------------
-  const deleteItem = async (item) => {
-    setLoading(true);
-
-    try {
-      const updated = await publicApi.removeCart(item.product._id);
-
-      setCart(updated);
-    } catch (err) {
-      console.error(err);
-    }
-
-    setLoading(false);
-  };
-
-    // -------------------------------
-  // clear ITEM
-  // -------------------------------
-  const clearcart = async () => {
-       const updated = await publicApi.clearCart();
+    const updated = await publicApi.updateCart(item.product._id, qty);
     setCart(updated);
-  }
+    setLoading(false);
+  };
 
-  // -------------------------------
-  // UI
-  // -------------------------------
+  const removeItem = async (item) => {
+    setLoading(true);
+    const updated = await publicApi.removeCart(item.product._id);
+    setCart(updated);
+    setLoading(false);
+  };
 
   return (
     <>
       <Navbar />
 
-      <div className="cart-container">
-        <h2 className="title">Your Cart</h2>
+      <section className="cart-page">
+        {/* LEFT */}
+        <div className="cart-left">
+          <h2>Shopping Cart <span>{items.length} Items</span></h2>
 
-        {validItems.length === 0 && <p>Your cart is empty.</p>}
+          <div className="cart-header">
+            <span>Product Details</span>
+            <span>Subtotal</span>
+            <span>Action</span>
+          </div>
 
-        {validItems.map((item,index) => (
-  <div
-    key={`${item?.product?._id || "no-id"}-${index}`}
-    className="cart-item"
-  >
-            {/* Product Image */}
-            <img
-              src={item?.product?.images?.[0] ?? null}
-              width={80}
-              height={80}
-              className="cart-img"
-              alt={item.product.title}
-            />
-
-            {/* Product Info */}
-            <div className="cart-info">
-              <h3>{item.product.title}</h3>
-              <p>₹{item.price}</p>
-
-              {/* Quantity Buttons */}
-              <div className="qty-controls">
-                <button disabled={loading} onClick={() => decrementQty(item)}>
-                  -
-                </button>
-
-                <span>{item.qty}</span>
-
-                <button disabled={loading} onClick={() => incrementQty(item)}>
-                  +
-                </button>
+          {items.map((item) => (
+            <div key={item.product._id} className="cart-row">
+              <div className="cart-product">
+                <img src={item.product.images?.[0]} alt="" />
+                <div>
+                  <h4>{item.product.title}</h4>
+                  <p>Qty: {item.qty}</p>
+                  <div className="qty-btns">
+                    <button onClick={() => updateQty(item, item.qty - 1)}>-</button>
+                    <span>{item.qty}</span>
+                    <button onClick={() => updateQty(item, item.qty + 1)}>+</button>
+                  </div>
+                </div>
               </div>
 
-              <p>
-                <b>Total: ₹{item.price * item.qty}</b>
-              </p>
+              <div className="cart-price">
+                ${item.price * item.qty}
+              </div>
+
+              <button
+                className="cart-remove"
+                onClick={() => removeItem(item)}
+                disabled={loading}
+              >
+                ✖
+              </button>
             </div>
+          ))}
 
-            {/* Delete Button */}
-            <button
-              className="delete-btn"
-              disabled={loading}
-              onClick={() => deleteItem(item)}
-            >
-              ❌
-            </button>
+          <Link href="/" className="continue">
+            ← Continue Shopping
+          </Link>
+        </div>
+
+        {/* RIGHT */}
+        <div className="cart-right">
+          <h3>Order Summary</h3>
+
+          <div className="summary-row">
+            <span>Price</span>
+            <span>${subtotal}</span>
           </div>
-        ))}
 
-        {/* Grand Total */}
-        <h2 className="title">Total Price: ₹{total}</h2>
-            <button
-              className="Clear-btn"
-              disabled={loading}
-              onClick={() => clearcart()}
-            >
-     All Item Remove
-            </button>
-      </div>
+          <div className="summary-row">
+            <span>Shipping Fee</span>
+            <span className="green">Free</span>
+          </div>
+
+          <div className="summary-row">
+            <span>Tax (2%)</span>
+            <span>${tax}</span>
+          </div>
+
+          <div className="summary-total">
+            <span>Total Amount:</span>
+            <span>${total}</span>
+          </div>
+
+          <button className="place-order">Place Order</button>
+        </div>
+      </section>
 
       <Footer />
     </>

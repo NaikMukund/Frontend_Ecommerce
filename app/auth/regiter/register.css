@@ -1,71 +1,95 @@
-.register-page {
+/* Full screen background */
+.auth-wrapper {
+  position: relative;
   min-height: 100vh;
+  background: url("/images/auth-bg.jpg") center/cover no-repeat;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: aliceblue;
-  padding: 1rem;
+  justify-content: center;
 }
 
-.register-form {
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Card */
+.auth-card {
+  position: relative;
+  width: 400px;
   background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
+  padding: 30px 28px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  z-index: 1;
 }
 
-.register-form h2 {
+/* Title */
+.auth-card h2 {
   text-align: center;
-  font-size: 1.75rem;
-  margin-bottom: 1.5rem;
-  color: #333;
+  color: #2f855a;
+  margin-bottom: 18px;
 }
 
-.register-form label {
+/* Labels */
+.auth-card label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 12px;
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: black;
 }
 
-.register-form input,
-.register-form select {
+/* Inputs & select */
+.auth-card input,
+.auth-card select {
   width: 100%;
-  padding: 0.5rem;
+  margin-top: 6px;
+  padding: 10px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  outline: none;
+  background: white;
 }
 
-.btn-register {
+.auth-card input:focus,
+.auth-card select:focus {
+  border-color: #38a169;
+}
+
+/* Button */
+.auth-card button {
   width: 100%;
-  padding: 0.75rem;
-  border-radius: 8px;
-  background: #2575fc;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1rem;
+  margin-top: 18px;
+  padding: 12px;
+  background: #38a169;
+  color: white;
   border: none;
+  border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.btn-register:hover {
-  background: #1a5ed0;
+.auth-card button:hover {
+  background: #2f855a;
 }
 
-.error-text {
+/* Footer link */
+.link-text {
+  font-size: 13px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.link-text a {
+  color: #38a169;
+  font-weight: 500;
+}
+
+/* Error */
+.error {
   color: red;
+  font-size: 13px;
   text-align: center;
-  margin-bottom: 1rem;
-}
-
-.footer-text {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: #555;
 }

@@ -1,0 +1,92 @@
+/* Full screen background */
+.auth-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: url("/images/auth-bg.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Login Card */
+.auth-card {
+  position: relative;
+  width: 380px;
+  background: #fff;
+  padding: 30px 28px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+/* Title */
+.auth-card h2 {
+  text-align: center;
+  color: #2f855a;
+  margin-bottom: 20px;
+}
+
+/* Labels */
+.auth-card label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 12px;
+  display: block;
+}
+
+/* Inputs */
+.auth-card input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+}
+
+.auth-card input:focus {
+  border-color: #38a169;
+}
+
+/* Button */
+.auth-card button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background: #38a169;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.auth-card button:hover {
+  background: #2f855a;
+}
+
+/* Links */
+.link-text {
+  font-size: 13px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.link-text a {
+  color: #38a169;
+  font-weight: 500;
+}
+
+/* Error */
+.error {
+  color: red;
+  font-size: 13px;
+  text-align: center;
+}

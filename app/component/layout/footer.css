@@ -1,0 +1,68 @@
+.footer {
+  background: #eef7f2;
+  padding: 50px 60px 20px;
+  color: #374151;
+  font-size: 14px;
+}
+
+/* Top section */
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #d1fae5;
+}
+
+/* Brand */
+.footer-col.brand p {
+  margin-top: 12px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 600;
+  color: #065f46;
+}
+
+.logo span {
+  background: #22c55e;
+  color: white;
+  padding: 12px 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+/* Headings */
+.footer-col h4 {
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #111827;
+}
+
+/* Lists */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.footer-col ul li:hover {
+  color: #22c55e;
+}
+
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #6b7280;
+}

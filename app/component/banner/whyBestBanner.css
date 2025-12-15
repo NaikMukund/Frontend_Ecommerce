@@ -1,0 +1,86 @@
+.why-banner {
+    background-image: url("/bottom_banner_image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 60px 40px;
+    border-radius: 20px;
+    margin: 60px auto;
+    max-width: 1200px;
+}
+
+.why-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+/* LEFT */
+.why-left {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.person-img {
+    position: relative;
+    z-index: 1;
+}
+
+/* Floating badge */
+.delivery-badge {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* RIGHT */
+.why-right h2 {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #2f855a;
+}
+
+.why-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.why-item .icon {
+    background: #3cb371;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.why-item h4 {
+    margin: 0;
+    font-size: 16px;
+    color: black;
+}
+
+.why-item p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #4b5563;
+}

@@ -15,6 +15,8 @@ export const publicApi = {
 
   getProducts: () => http("/products"),
   getProduct: (id) => http(`/products/${id}`),
+    // 🔥 NEW: get products by category
+  getProductsByCategory: (category) =>  http(`/products/category/${category}`), 
   getCart: () => http("/cart"),
   // Add to cart
   addCart: (productId, qty = 1) =>

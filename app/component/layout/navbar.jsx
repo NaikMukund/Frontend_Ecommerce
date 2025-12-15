@@ -1,41 +1,44 @@
 "use client";
 
 import Link from "next/link";
+import "./navbar.css";
 
 export default function Navbar() {
   return (
-    <nav
-      style={{
-        padding: "15px 20px",
-    background: "#362424",
-        color: "#fff",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-            position: "sticky", 
-        top: 0,             
-        zIndex: 999, 
-      }}
-    >
-      <h2 style={{ margin: 0 }}>E-Commerce</h2>
-
-      <div style={{ display: "flex", gap: "20px" }}>
-        <Link href="/auth/login" style={{ color: "#fff", textDecoration: "none" }}>
-          Log-in
-        </Link>
-
-        <Link href="/products" style={{ color: "#fff", textDecoration: "none" }}>
-          Products
-        </Link>
-
-        <Link href="/cart" style={{ color: "#fff", textDecoration: "none" }}>
-          Cart
-        </Link>
-
-        <Link href="/profile" style={{ color: "#fff", textDecoration: "none" }}>
-          Profile
+    <header className="navbar">
+      {/* Left: Logo */}
+      <div className="navbar-left">
+        <Link href="/" className="logo">
+          <span className="logo-icon">G</span>
+          <span className="logo-text">GroceryCart</span>
         </Link>
       </div>
-    </nav>
+
+      {/* Center: Menu */}
+      {/* <nav className="navbar-center">
+        <Link href="/">Home</Link>
+        <Link href="/products">All Product</Link>
+      
+      </nav> */}
+
+      {/* Right: Search + Cart + Login */}
+      <div className="navbar-right">
+           <Link href="/">Home</Link>
+        <Link href="/products">All Product</Link>
+        <div className="search-box">
+          <input type="text" placeholder="Search products" />
+          <span className="search-icon">🔍</span>
+        </div>
+
+        <Link href="/cart" className="cart">
+          🛒
+          <span className="cart-badge">0</span>
+        </Link>
+
+        <Link href="/auth/login" className="login-btn">
+          Login
+        </Link>
+      </div>
+    </header>
   );
 }

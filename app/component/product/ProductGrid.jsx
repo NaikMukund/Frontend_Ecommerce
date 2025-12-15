@@ -1,31 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { publicApi } from "../../lib/publicApi";
 import ProductCard from "../../component/product/ProductCard";
+import "./product.css";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
+
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const data = await publicApi.getProducts();
+        setLoading(true);
+        setError("");
 
-        // Safe check for different API formats
-        const productList =
-          data?.products ||
-          data?.items ||
-          data?.data ||
-          [];
-
-        if (Array.isArray(productList)) {
-          setProducts(productList);
+        let data;
+        if (category) {
+          data = await publicApi.getProductsByCategory(category);
+          setProducts(data?.products || []);
         } else {
-          setProducts([]);
-          setError("Invalid product data received from API");
+          data = await publicApi.getProducts();
+          setProducts(data?.products || data?.items || data?.data || []);
         }
       } catch (err) {
         setError(err.message || "Failed to fetch products");
@@ -35,20 +36,30 @@ export default function ProductsPage() {
     }
 
     fetchProducts();
-  }, []);
+  }, [category]);
 
-  if (loading) return <p>Loading products...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) return <p className="page-status">Loading products...</p>;
+  if (error) return <p className="page-status error">{error}</p>;
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-      {products.length > 0 ? (
-        products.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))
-      ) : (
-        <p>No products found.</p>
+    <section className="products-page">
+      {/* CATEGORY TITLE */}
+      {category && (
+        <h2 className="category-title">
+          {category.toUpperCase()}
+        </h2>
       )}
-    </div>
+
+      {/* PRODUCT GRID */}
+      <div className="products-grid">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))
+        ) : (
+          <p className="page-status">No products found.</p>
+        )}
+      </div>
+    </section>
   );
 }
