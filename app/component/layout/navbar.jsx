@@ -25,6 +25,7 @@ export default function Navbar() {
       <div className="navbar-right">
            <Link href="/">Home</Link>
         <Link href="/products">All Product</Link>
+          <Link href="/order">Order</Link>
         <div className="search-box">
           <input type="text" placeholder="Search products" />
           <span className="search-icon">🔍</span>

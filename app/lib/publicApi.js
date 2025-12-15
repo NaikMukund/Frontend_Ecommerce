@@ -51,4 +51,8 @@ export const publicApi = {
       method: "POST",
       body: JSON.stringify({ data }),
     }),
+
+    getUserOrders: () => http("/orders/"),
+getOrderById: (id) => http(`/orders/${id}`),
+
 };

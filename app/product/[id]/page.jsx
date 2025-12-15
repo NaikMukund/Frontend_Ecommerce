@@ -35,6 +35,20 @@ export default function ProductDetails() {
   const handleAddToCart = async () => {
     await publicApi.addCart(product._id);
     router.push("/cart");
+
+      const loggedIn =
+      localStorage.getItem("accessToken") ||
+      sessionStorage.getItem("merchantToken") ||
+      sessionStorage.getItem("adminToken");
+
+    if (!loggedIn) {
+      alert("Please login to add items to cart");
+      router.push("/auth/login");
+      return;
+    }
+
+    // ✅ USER IS LOGGED IN → ADD TO CART API CALL
+    console.log("Add to cart:", product._id);
   };
 
   return (

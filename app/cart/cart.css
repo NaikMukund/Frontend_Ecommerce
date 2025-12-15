@@ -9,8 +9,9 @@
 
 /* LEFT */
 .cart-left h2 {
-  font-size: 22px;
+  font-size: 36px;
   margin-bottom: 20px;
+  color: green;
 }
 
 .cart-left h2 span {
