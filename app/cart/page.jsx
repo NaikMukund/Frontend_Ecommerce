@@ -6,6 +6,7 @@ import Footer from "../component/layout/footer";
 import { publicApi } from "../lib/publicApi";
 import "./cart.css";
 import Link from "next/link";
+import PlaceOrder from "../component/order/PlaceOrder";
 
 export default function CartPage() {
   const [cart, setCart] = useState(null);
@@ -91,7 +92,7 @@ export default function CartPage() {
         </div>
 
         {/* RIGHT */}
-        <div className="cart-right">
+        {/* <div className="cart-right">
           <h3>Order Summary</h3>
 
           <div className="summary-row">
@@ -115,7 +116,19 @@ export default function CartPage() {
           </div>
 
           <button className="place-order">Place Order</button>
-        </div>
+        </div> */}
+        <PlaceOrder
+  subtotal={subtotal}
+  tax={tax}
+  total={total}
+  onPlaceOrder={async ({ paymentMethod }) => {
+    // 🔥 CALL BACKEND PLACE ORDER API
+    await publicApi.placeOrder({ paymentMethod });
+    console.log("paymentMethod",paymentMethod);
+    
+    alert("Order placed successfully!");
+  }}
+/>
       </section>
 
       <Footer />

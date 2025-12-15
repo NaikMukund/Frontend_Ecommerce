@@ -44,4 +44,11 @@ export const publicApi = {
     method: "PUT",
     body: JSON.stringify({ productId, qty }),
   }),
+
+  //order
+  placeOrder: (data) => http("/orders",
+     {
+      method: "POST",
+      body: JSON.stringify({ data }),
+    }),
 };
