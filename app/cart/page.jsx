@@ -7,14 +7,17 @@ import { publicApi } from "../lib/publicApi";
 import "./cart.css";
 import Link from "next/link";
 import PlaceOrder from "../component/order/PlaceOrder";
-
+import { useDispatch } from "react-redux";
+import { setCartCount } from "../../store/cartSlice";
 export default function CartPage() {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
-
+const dispatch = useDispatch();
   useEffect(() => {
     async function loadCart() {
       const data = await publicApi.getCart();
+     
+       dispatch(setCartCount(data.items.length));
       setCart(data);
     }
     loadCart();

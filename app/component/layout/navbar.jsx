@@ -2,9 +2,14 @@
 
 import Link from "next/link";
 import "./navbar.css";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "../../../store/cartSlice";
 
 export default function Navbar() {
+    const orderCount = useSelector(selectCartCount);
+
   return (
+
     <header className="navbar">
       {/* Left: Logo */}
       <div className="navbar-left">
@@ -14,12 +19,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Center: Menu */}
-      {/* <nav className="navbar-center">
-        <Link href="/">Home</Link>
-        <Link href="/products">All Product</Link>
-      
-      </nav> */}
+  
 
       {/* Right: Search + Cart + Login */}
       <div className="navbar-right">
@@ -33,7 +33,7 @@ export default function Navbar() {
 
         <Link href="/cart" className="cart">
           🛒
-          <span className="cart-badge">0</span>
+          <span className="cart-badge">{orderCount}</span>
         </Link>
 
         <Link href="/auth/login" className="login-btn">
