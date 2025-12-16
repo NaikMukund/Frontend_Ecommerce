@@ -2,16 +2,25 @@
 
 import Link from "next/link";
 import "./navbar.css";
+import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectCartCount } from "../../../store/cartSlice";
 
 export default function Navbar() {
-    const orderCount = useSelector(selectCartCount);
+  const orderCount = useSelector(selectCartCount);
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const pathname = usePathname(); // 🔥 current route
+
+  const handleSearch = () => {
+    if (!search.trim()) return;
+    router.push(`/products?q=${encodeURIComponent(search)}`);
+    setSearch("");
+  };
 
   return (
-
     <header className="navbar">
-      {/* Left: Logo */}
       <div className="navbar-left">
         <Link href="/" className="logo">
           <span className="logo-icon">G</span>
@@ -19,23 +28,58 @@ export default function Navbar() {
         </Link>
       </div>
 
-  
-
-      {/* Right: Search + Cart + Login */}
       <div className="navbar-right">
-           <Link href="/">Home</Link>
-        <Link href="/products">All Product</Link>
-          <Link href="/order">Order</Link>
+        {/* HOME */}
+        <Link
+          href="/"
+          className={pathname === "/" ? "nav-link active" : "nav-link"}
+        >
+          Home
+        </Link>
+
+        {/* PRODUCTS */}
+        <Link
+          href="/products"
+          className={pathname.startsWith("/products") ? "nav-link active" : "nav-link"}
+        >
+          All Product
+        </Link>
+
+        {/* ORDERS */}
+        <Link
+          href="/order"
+          className={pathname.startsWith("/order") ? "nav-link active" : "nav-link"}
+        >
+          Order
+        </Link>
+          <Link
+          href="/wallet"
+          className={pathname.startsWith("/order") ? "nav-link active" : "nav-link"}
+        >
+        Wallet
+        </Link>
+
+        {/* SEARCH */}
         <div className="search-box">
-          <input type="text" placeholder="Search products" />
-          <span className="search-icon">🔍</span>
+          <input
+            type="text"
+            placeholder="Search products"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          />
+          <span className="search-icon" onClick={handleSearch}>
+            🔍
+          </span>
         </div>
 
+        {/* CART */}
         <Link href="/cart" className="cart">
           🛒
           <span className="cart-badge">{orderCount}</span>
         </Link>
 
+        {/* LOGIN */}
         <Link href="/auth/login" className="login-btn">
           Login
         </Link>

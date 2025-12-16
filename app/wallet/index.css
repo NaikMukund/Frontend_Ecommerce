@@ -1,0 +1,122 @@
+/* ===== Wallet Page Wrapper ===== */
+.wallet-container {
+
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+border: black;
+  color: #111827;
+}
+
+/* ===== Title ===== */
+.wallet-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* ===== Balance Card ===== */
+.wallet-balance {
+    background: linear-gradient(135deg, #372d80, #22c55e);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.wallet-balance span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.wallet-balance h3 {
+  font-size: 28px;
+  margin-top: 6px;
+}
+
+/* ===== Add Money Section ===== */
+.add-money {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.add-money input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 14px;
+}
+
+.add-money input:focus {
+  border-color: #22c55e;
+}
+
+.add-money button {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.add-money button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.add-money button:hover:not(:disabled) {
+  background: #15803d;
+}
+
+/* ===== Transactions ===== */
+.transactions-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-type {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.transaction-ref {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.transaction-amount.credit {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.transaction-amount.debit {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* ===== Empty State ===== */
+.no-transactions {
+  font-size: 14px;
+  color: #6b7280;
+  padding: 12px 0;
+}

@@ -13,6 +13,7 @@ export default function ProductsPage() {
 
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
+  const query = searchParams.get("q"); // 🔥 SEARCH TEXT
 
   useEffect(() => {
     async function fetchProducts() {
@@ -21,12 +22,32 @@ export default function ProductsPage() {
         setError("");
 
         let data;
-        if (category) {
+
+        // 🔥 CATEGORY + SEARCH
+        if (category && query) {
+          data = await publicApi.searchProducts(query);
+          const filtered = (data.items || []).filter(
+            (p) => p.category === category
+          );
+          setProducts(filtered);
+        }
+
+        // 🔥 SEARCH ONLY
+        else if (query) {
+          data = await publicApi.searchProducts(query);
+          setProducts(data?.items || []);
+        }
+
+        // 🔥 CATEGORY ONLY
+        else if (category) {
           data = await publicApi.getProductsByCategory(category);
           setProducts(data?.products || []);
-        } else {
+        }
+
+        // 🔥 ALL PRODUCTS
+        else {
           data = await publicApi.getProducts();
-          setProducts(data?.products || data?.items || data?.data || []);
+          setProducts(data?.products || data?.items || []);
         }
       } catch (err) {
         setError(err.message || "Failed to fetch products");
@@ -36,17 +57,19 @@ export default function ProductsPage() {
     }
 
     fetchProducts();
-  }, [category]);
+  }, [category, query]);
 
   if (loading) return <p className="page-status">Loading products...</p>;
   if (error) return <p className="page-status error">{error}</p>;
 
   return (
     <section className="products-page">
-      {/* CATEGORY TITLE */}
-      {category && (
+      {/* TITLE */}
+      {(category || query) && (
         <h2 className="category-title">
-          {category.toUpperCase()}
+          {query
+            ? `Search results for "${query}"`
+            : category.toUpperCase()}
         </h2>
       )}
 

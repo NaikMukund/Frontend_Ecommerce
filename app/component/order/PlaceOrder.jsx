@@ -10,7 +10,7 @@ export default function PlaceOrder({
   onPlaceOrder,
 }) {
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentMethod, setPaymentMethod] = useState("cod");
 
   const handleOrder = async () => {
     setLoading(true);
@@ -28,7 +28,7 @@ export default function PlaceOrder({
           <span>Delivery Address</span>
           <button className="link-btn">Change</button>
         </div>
-        <p className="muted">No address found</p>
+        <p className="muted">Mumbai, 400001</p>
       </div>
 
       {/* Payment */}
@@ -38,8 +38,8 @@ export default function PlaceOrder({
           value={paymentMethod}
           onChange={(e) => setPaymentMethod(e.target.value)}
         >
-          <option value="COD">Cash On Delivery</option>
-          <option value="ONLINE">Online Payment</option>
+          <option value="cod">Cash On Delivery</option>
+          <option value="wallet">Wallet</option>
         </select>
       </div>
 

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "./component/layout/navbar";
 import Footer from "./component/layout/footer";
-import BannerSlider from "./component/banner/BannerSlider";
 import Header from "./component/section-header/Header";
 import WhyBestBanner from "./component/banner/WhyBestBanner";
 import CategoryCard from "./component/category/CategoryCard";
@@ -19,17 +18,15 @@ export default function HomePage() {
     async function fetchProducts() {
       try {
         const data = await publicApi.getProducts();
-
-        const items =
-          data?.items || data?.products || data?.data || [];
+        const items = data?.items || data?.products || data?.data || [];
 
         // 🔥 first product per category
         const map = {};
-        items.forEach((item) => {
-          if (!item || !item.category) return;
+        items.forEach((i) => {
+          if (!i || !i.category) return;
 
-          if (!map[item.category]) {
-            map[item.category] = item;
+          if (!map[i.category]) {
+            map[i.category] = i;
           }
         });
 

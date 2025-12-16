@@ -47,6 +47,8 @@ body {
   padding: 24px 28px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   animation: slideUp 0.25s ease-out;
+      color: black;
+
 }
 
 @keyframes slideUp {
@@ -159,4 +161,5 @@ select.input:focus {
 
 .modal-box::-webkit-scrollbar-thumb:hover {
   background: #aaa;
+  
 }

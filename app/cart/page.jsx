@@ -120,18 +120,28 @@ const dispatch = useDispatch();
 
           <button className="place-order">Place Order</button>
         </div> */}
-        <PlaceOrder
+ <PlaceOrder
   subtotal={subtotal}
   tax={tax}
   total={total}
   onPlaceOrder={async ({ paymentMethod }) => {
-    // 🔥 CALL BACKEND PLACE ORDER API
-    await publicApi.placeOrder({ paymentMethod });
-    console.log("paymentMethod",paymentMethod);
-    
-    alert("Order placed successfully!");
+    try {
+      await publicApi.placeOrder({
+        paymentMethod,
+        address: {
+          city: "Mumbai",
+          pincode: "400001",
+        },
+      });
+
+      alert("Order placed successfully!");
+      dispatch(setCartCount(0));
+    } catch (err) {
+      alert(err.message || "Order failed");
+    }
   }}
 />
+
       </section>
 
       <Footer />

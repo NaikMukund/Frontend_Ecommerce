@@ -4,7 +4,7 @@ import { buildURL } from "./url";
 export async function http(path, options = {}) {
   const token = getToken();
   const url = buildURL(path);
-
+console.log("FETCHING URL 👉", url);
   const res = await fetch(url, {
     method: options.method || "GET",
     headers: {
