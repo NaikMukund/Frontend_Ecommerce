@@ -9,6 +9,21 @@
     max-width: 1200px;
 }
 
+/* 🔥 TABLET */
+@media (max-width: 992px) {
+ .why-banner{
+   display: none;
+  }
+}
+
+/* 🔥 MOBILE */
+@media (max-width: 600px) {
+.why-banner{
+   display: none;
+  }
+}
+
+
 .why-container {
     display: grid;
     grid-template-columns: 1fr 1fr;

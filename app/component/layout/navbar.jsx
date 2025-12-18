@@ -10,13 +10,15 @@ import { selectCartCount } from "../../../store/cartSlice";
 export default function Navbar() {
   const orderCount = useSelector(selectCartCount);
   const [search, setSearch] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
-  const pathname = usePathname(); // 🔥 current route
+  const pathname = usePathname();
 
   const handleSearch = () => {
     if (!search.trim()) return;
     router.push(`/products?q=${encodeURIComponent(search)}`);
     setSearch("");
+    setMenuOpen(false);
   };
 
   return (
@@ -28,16 +30,16 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <div className="navbar-right">
-        {/* HOME */}
-        <Link
-          href="/"
-          className={pathname === "/" ? "nav-link active" : "nav-link"}
-        >
+      {/* Hamburger */}
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </div>
+
+      <div className={`navbar-right ${menuOpen ? "open" : ""}`}>
+        <Link href="/" className={pathname === "/" ? "nav-link active" : "nav-link"}>
           Home
         </Link>
 
-        {/* PRODUCTS */}
         <Link
           href="/products"
           className={pathname.startsWith("/products") ? "nav-link active" : "nav-link"}
@@ -45,21 +47,20 @@ export default function Navbar() {
           All Product
         </Link>
 
-        {/* ORDERS */}
         <Link
           href="/order"
           className={pathname.startsWith("/order") ? "nav-link active" : "nav-link"}
         >
           Order
         </Link>
-          <Link
+
+        <Link
           href="/wallet"
-          className={pathname.startsWith("/order") ? "nav-link active" : "nav-link"}
+          className={pathname.startsWith("/wallet") ? "nav-link active" : "nav-link"}
         >
-        Wallet
+          Wallet
         </Link>
 
-        {/* SEARCH */}
         <div className="search-box">
           <input
             type="text"
@@ -68,18 +69,14 @@ export default function Navbar() {
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
-          <span className="search-icon" onClick={handleSearch}>
-            🔍
-          </span>
+          <span className="search-icon" onClick={handleSearch}>🔍</span>
         </div>
 
-        {/* CART */}
         <Link href="/cart" className="cart">
           🛒
           <span className="cart-badge">{orderCount}</span>
         </Link>
 
-        {/* LOGIN */}
         <Link href="/auth/login" className="login-btn">
           Login
         </Link>
